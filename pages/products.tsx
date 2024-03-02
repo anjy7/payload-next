@@ -3,6 +3,8 @@ import { GetServerSideProps } from 'next';
 import payload from 'payload';
 import Head from '../components/Head';
 import { Product } from '../payload-types';
+// import { CounterComponent } from 'rc4-test';
+import { Capitalize } from "npm-payload-test"
 
 interface ProductProps {
   products: [Product];
@@ -12,6 +14,7 @@ const Products: React.FC<ProductProps> = ({ products }) => (
   <main className="products-page">
     <Head title="Product list" />
     <div className="container">
+    <Capitalize str={'rc4'} />
       <h2>
         Products (
         {products.length}
@@ -55,25 +58,25 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const pageQuery = await payload.find({
     collection: 'products',
     limit: 30,
-    where: {
-      or: [
-        {
-          'colors.name': {
-            equals: 'Red',
-          },
-        },
-        {
-          and: [{
-            price: {
-              greater_than: 100,
-            },
-            'sizes.name': {
-              equals: 'XS',
-            },
-          }],
-        },
-      ],
-    },
+    // where: {
+    //   or: [
+    //     {
+    //       'colors.name': {
+    //         equals: 'Red',
+    //       },
+    //     },
+    //     {
+    //       and: [{
+    //         price: {
+    //           greater_than: 100,
+    //         },
+    //         'sizes.name': {
+    //           equals: 'XS',
+    //         },
+    //       }],
+    //     },
+    //   ],
+    // },
   });
 
   return {

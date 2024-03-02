@@ -5,7 +5,7 @@ const home = require('./home.json');
 const sample = require('./sample.json');
 
 
-require('dotenv').config();
+require('dotenv').config( {path: "C:/Projects/payload-next/.env"});
 
 const { PAYLOAD_SECRET, MONGODB_URI } = process.env;
 
@@ -16,27 +16,27 @@ const createHomePage = async () => {
     local: true,
   });
 
-  const createdMedia = await payload.create({
-    collection: 'media',
-    data: {
-      alt: 'Payload',
-    },
-    filePath: path.resolve(__dirname, './payload.jpg'),
-  });
+  // const createdMedia = await payload.create({
+  //   collection: 'media',
+  //   data: {
+  //     alt: 'Payload',
+  //   },
+  //   filePath: path.resolve(__dirname, './payload.jpg'),
+  // });
 
-  const createdSamplePage = await payload.create({
-    collection: 'pages',
-    data: sample,
-  });
+  // const createdSamplePage = await payload.create({
+  //   collection: 'pages',
+  //   data: sample,
+  // });
 
-  const homeString = JSON.stringify(home)
-    .replace(/{{IMAGE_ID}}/g, createdMedia.id)
-    .replace(/{{SAMPLE_PAGE_ID}}/g, createdSamplePage.id);
+  // const homeString = JSON.stringify(home)
+  //   .replace(/{{IMAGE_ID}}/g, createdMedia.id)
+  //   .replace(/{{SAMPLE_PAGE_ID}}/g, createdSamplePage.id);
 
-  await payload.create({
-    collection: 'pages',
-    data: JSON.parse(homeString),
-  });
+  // await payload.create({
+  //   collection: 'pages',
+  //   data: JSON.parse(homeString),
+  // });
 
   console.log('Seed completed!');
   process.exit(0);
@@ -44,7 +44,7 @@ const createHomePage = async () => {
 
 const createProducts = async () => {
   const colors = ['Red', 'Green', 'Blue', 'Black'];
-  const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+  const sizes = ['XS1', 'S1', 'M1', '1L', 'XL1', 'XXL1'];
   const colorsIds = [];
   const sizesIds = [];
 
@@ -102,9 +102,11 @@ const createProducts = async () => {
     });
   }
 
+  console.log('22222222!');
+console.log('PAYLOAD_CONFIG_PATH', PAYLOAD_CONFIG_PATH);
   console.log('Product seed completed!');
   process.exit(0);
 };
 
 createHomePage();
-createProducts();
+// createProducts();
